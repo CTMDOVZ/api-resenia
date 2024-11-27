@@ -45,7 +45,7 @@ functions:
     handler: EliminarResenia.handler
     events:
       - http:
-          path: /resenias/{reseña_id}
+          path: /resenias/{id_resenia}  # Correcto: {id_resenia}
           method: delete
           cors: true
 
@@ -53,7 +53,7 @@ functions:
     handler: ModificarResenia.handler
     events:
       - http:
-          path: /resenias/{reseña_id}
+          path: /resenias/{id_resenia}  # Correcto: {id_resenia}
           method: put
           cors: true
 
@@ -69,6 +69,6 @@ functions:
     handler: ObtenerReseniaById.handler
     events:
       - http:
-          path: /resenias/{id_resenia}
+          path: /resenias/{id_resenia}  # Correcto: {id_resenia}
           method: get
           cors: true
