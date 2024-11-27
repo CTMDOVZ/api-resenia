@@ -1,0 +1,74 @@
+org: mateoespinoza
+service: api-resenia
+
+provider:
+  name: aws
+  runtime: nodejs16.x  # Usamos Node.js 16.x
+  iam:
+    role: arn:aws:iam::399737753482:role/LabRole  # Aquí se asigna el ARN del rol LabRole
+
+  environment:
+    REVIEWS_TABLE: ${self:custom.tables.reviews}  # Nombre de la tabla DynamoDB para reseñas
+
+custom:
+  tables:
+    reviews: t_resenias  # Nombre de la tabla DynamoDB para reseñas
+
+resources:
+  Resources:
+    ReviewsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tables.reviews}
+        AttributeDefinitions:
+          - AttributeName: id_resenia
+            AttributeType: S
+          - AttributeName: id_vuelo
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id_resenia
+            KeyType: HASH  # Clave primaria por id_resenia
+          - AttributeName: id_vuelo
+            KeyType: RANGE  # Clave de ordenamiento por id_vuelo
+        BillingMode: PAY_PER_REQUEST
+
+functions:
+  CrearResenia:
+    handler: CrearResenia.handler
+    events:
+      - http:
+          path: /resenias
+          method: post
+          cors: true
+
+  EliminarResenia:
+    handler: EliminarResenia.handler
+    events:
+      - http:
+          path: /resenias/{reseña_id}
+          method: delete
+          cors: true
+
+  ModificarResenia:
+    handler: ModificarResenia.handler
+    events:
+      - http:
+          path: /resenias/{reseña_id}
+          method: put
+          cors: true
+
+  ObtenerResenia:
+    handler: ObtenerResenia.handler
+    events:
+      - http:
+          path: /resenias
+          method: get
+          cors: true
+
+  ObtenerReseniaById:
+    handler: ObtenerReseniaById.handler
+    events:
+      - http:
+          path: /resenias/{id_resenia}
+          method: get
+          cors: true
