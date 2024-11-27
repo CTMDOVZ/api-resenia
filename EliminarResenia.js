@@ -19,7 +19,7 @@ exports.handler = async (event) => {
             TableName: REVIEWS_TABLE,
             Key: {
                 id_resenia: reseña_id,
-                id_usuario: user_id  // Asegurarse de que el usuario esté autorizado a eliminar la reseña
+                id_usuario: user_id  // Asegurarse de que el usuario esté autorizado a eliminar la rdsdsdeseña
             }
         };
 
