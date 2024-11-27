@@ -1,6 +1,5 @@
 const AWS = require('aws-sdk');
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-const { DateTime } = require('luxon');  // Usando Luxon para manejar las fechas
 
 const REVIEWS_TABLE = process.env.REVIEWS_TABLE;
 
@@ -13,7 +12,7 @@ exports.handler = async (event) => {
         if (!body.id_vuelo || !body.calificacion || !body.comentario || !body.user_id) {
             return {
                 statusCode: 400,
-                body: JSON.stringify({ message: 'id_vuelo, cantidad_boletos, precio_total y user_id son obligatorios' })
+                body: JSON.stringify({ message: 'id_vuelo, calificacion, comentario y user_id son obligatorios' })
             };
         }
 
@@ -26,7 +25,7 @@ exports.handler = async (event) => {
             id_vuelo: body.id_vuelo, // ID del vuelo
             calificacion: body.calificacion,  // Calificación de la reseña
             comentario: body.comentario,      // Comentario de la reseña
-            fecha_resena: DateTime.now().toISO()  // Fecha de la reseña usando Luxon
+            fecha_resena: new Date().toISOString()  // Fecha de la reseña usando el objeto Date
         };
 
         // Guardar la reseña en DynamoDB
