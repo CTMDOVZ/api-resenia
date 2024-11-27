@@ -8,7 +8,7 @@ provider:
     role: arn:aws:iam::399737753482:role/LabRole  # Aquí se asigna el ARN del rol LabRole
 
   environment:
-    REVIEWS_TABLE: ${self:custom.tables.reviews}  # Nombre de la tabla DynamoDB para reseñas
+    REVIEWS_TABLE: ${self:custom.tables.reviews}  # Nombre de la tabla DynamoDB para reseñasdddddd
 
 custom:
   tables:
