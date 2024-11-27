@@ -3,7 +3,7 @@ service: api-resenia
 
 provider:
   name: aws
-  runtime: nodejs16.x  # Usamos Node.js 16.x
+  runtime: nodejs16.x  # Usamos Node.js 16.xdd
   iam:
     role: arn:aws:iam::399737753482:role/LabRole  # Aquí se asigna el ARN del rol LabRole
 
