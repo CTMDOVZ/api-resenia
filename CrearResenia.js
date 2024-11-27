@@ -1,6 +1,6 @@
 const AWS = require('aws-sdk');
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-const uuid = require('uuid'); // Para generar IDs únicos
+const uuid = require('uuid'); // Para generar IDs únicosdsdsds
 
 const REVIEWS_TABLE = process.env.REVIEWS_TABLE;
 
